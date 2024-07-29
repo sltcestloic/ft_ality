@@ -1,0 +1,22 @@
+# Ignore build directory
+_build/
+
+# Ignore OPAM files
+*.install
+*.opam
+
+# Ignore editor/IDE files
+*~
+*.swp
+*.swo
+.DS_Store
+.idea/
+*.vscode/
+*.vscode*
+
+# Ignore ocamlfind files
+.ocamlinit
+.ocamlinit.new
+
+# Ignore Dune cache files
+.dune/
