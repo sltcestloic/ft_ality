@@ -23,6 +23,7 @@ let parse ic =
   try
     let lines = read_lines ic [] in
     let keys, combos = split_keys_combos lines in
+    (keys, combos)
   with e ->
     close_in_noerr ic;
     raise e

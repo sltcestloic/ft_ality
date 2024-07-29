@@ -2,7 +2,7 @@ type automaton = {
   keys: key list;
   states: string list;
   state: string;
-  transitions: (string, Transition.transition list) Hashtbl.t;
+  transitions: (string, transition list) Hashtbl.t;
 }
 
 and transition = {

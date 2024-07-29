@@ -1,8 +1,8 @@
 include Parser
 
 let () =
-  if Array.length Sys.argv != 1 then (
-    print_string "Usage: ./";
+  if Array.length Sys.argv != 2 then (
+    print_string "Usage: ";
     print_string Sys.argv.(0);
     print_endline " [file]";
   )
@@ -13,5 +13,10 @@ let () =
       exit 1
     );
     let in_channel = open_in filename in
-    Parser.parse in_channel;
+    let keys, combos = Parser.parse in_channel in
+
+    Printf.printf "Keys:\n%s\n" (String.concat "\n" keys);
+    Printf.printf "Combos:\n%s\n" (String.concat "\n" combos);
+
+    close_in in_channel;
   )
