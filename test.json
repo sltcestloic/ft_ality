@@ -1,0 +1,33 @@
+{
+    "Keys": [
+        {
+            "key": "A",
+            "value": "A"
+        }
+    ],
+    "states": [
+        "initial",
+        "A",
+        "AA",
+        "AAB",
+        "AAB4"
+    ],
+
+   "transitions": {
+        "initial": [
+            { "read": "A", "to_state": "A", "write": "" }
+        ],
+        "A": [
+            { "read": "A", "to_state": "AA", "write": "" }
+        ],
+        "AA": [
+            { "read": "B", "to_state": "AAB", "write": "Beautiful Rhythm" }
+        ],
+        "AAB": [
+            { "read": "4", "to_state": "AAB4", "write": "Beautiful Rhythm ~ Laughing Bea Her Hua" },
+        ],
+        "AAB4": [
+
+        ]
+    }
+}
