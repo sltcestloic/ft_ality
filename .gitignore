@@ -1,5 +1,6 @@
-# Ignore build directory
+# Ignore build directory and exec
 _build/
+ft_ality
 
 # Ignore OPAM files
 *.install
