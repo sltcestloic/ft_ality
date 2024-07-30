@@ -1,3 +1,5 @@
+include Types
+
 let exit_error message =
   prerr_endline message;
   exit 1
@@ -36,3 +38,28 @@ let validate_file lines =
       aux 1 0 rest
   | _ ->
       exit_error "Error: Grammar file must start with #Keys."
+
+let validate_keys lines =
+  let is_valid_format line =
+    let colon_count = String.fold_left (fun count ch -> if ch = ':' then count + 1 else count) 0 line in
+    if colon_count <> 1 then
+      false
+    else
+      try
+        let index = String.index line ':' in
+        let left_part = String.sub line 0 index in
+        let right_part = String.sub line (index + 1) (String.length line - index - 1) in
+        String.length left_part > 0 && String.length right_part > 0
+      with Not_found -> false
+  in
+  let rec aux = function
+    | [] -> true
+    | line :: rest ->
+        if is_valid_format line then
+          aux rest
+        else (
+          prerr_endline ("Error: Invalid syntax in line: " ^ line);
+          exit 1
+        )
+  in
+  aux lines

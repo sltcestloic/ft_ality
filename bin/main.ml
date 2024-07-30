@@ -13,10 +13,12 @@ let () =
       exit 1
     );
     let in_channel = open_in filename in
-    let keys, combos = Parser.parse in_channel in
+    let automaton = Parser.parse in_channel in
 
-    Printf.printf "Keys:\n%s\n" (String.concat "\n" keys);
-    Printf.printf "Combos:\n%s\n" (String.concat "\n" combos);
+    let keys = automaton.keys in
+
+    List.iter (fun key -> print_endline (key.key ^ " " ^ key.value)) keys;
+
 
     close_in in_channel;
   )
