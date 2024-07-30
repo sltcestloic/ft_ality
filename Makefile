@@ -14,4 +14,4 @@ opam:
 .PHONY: build
 build:
 	dune build
-	mv _build/default/bin/$(NAME).exe $(NAME)
+	mv _build/default/bin/main.exe $(NAME)
