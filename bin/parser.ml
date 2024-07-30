@@ -22,8 +22,11 @@ let rec read_lines ic lines =
 let parse ic =
   try
     let lines = read_lines ic [] in
-    let keys, combos = split_keys_combos lines in
-    (keys, combos)
+    if validate_lines(lines) then
+      let keys, combos = split_keys_combos lines in
+      (keys, combos)
+    else
+      print_endline "Invalid file format: file contains empty lines";
   with e ->
     close_in_noerr ic;
     raise e
