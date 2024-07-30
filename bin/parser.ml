@@ -1,3 +1,5 @@
+include Validation
+
 type automaton = Types.automaton
 
 let split_keys_combos lines =
@@ -22,11 +24,13 @@ let rec read_lines ic lines =
 let parse ic =
   try
     let lines = read_lines ic [] in
-    if validate_lines(lines) then
+    if validate_file(lines) then
       let keys, combos = split_keys_combos lines in
       (keys, combos)
-    else
+    else (
       print_endline "Invalid file format: file contains empty lines";
+      exit 1
+    )
   with e ->
     close_in_noerr ic;
     raise e
