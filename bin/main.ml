@@ -1,4 +1,5 @@
 include Parser
+include Input
 
 let () =
   if Array.length Sys.argv != 2 then (
@@ -19,4 +20,7 @@ let () =
     Printf.printf "Combos:\n%s\n" (String.concat "\n" combos);
 
     close_in in_channel;
+
+    Input.init();
+    Input.get_input();
   )
