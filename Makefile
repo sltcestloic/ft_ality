@@ -9,9 +9,20 @@ $(NAME): opam build
 opam:
 	OPAMYES=true opam update
 	OPAMYES=true opam upgrade
-	opam install dune
+	OPAMYES=true opam install ocamlsdl2
+	OPAMYES=true opam install dune
 
 .PHONY: build
 build:
 	dune build
-	mv _build/default/bin/main.exe $(NAME)
+	cp -f _build/default/bin/main.exe $(NAME)
+
+.PHONY: clean
+clean:
+
+.PHONY: fclean
+fclean: clean
+	rm -rfv $(NAME)
+
+.PHONY: re
+re: fclean all
