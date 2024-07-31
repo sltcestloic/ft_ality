@@ -1,16 +1,17 @@
 {
-    "Keys": [
+    "keys": [
         {
             "key": "A",
             "value": "A"
+        },
+        {
+            "key": "B",
+            "value": "B"
+        },
+        {
+            "key": "4",
+            "value": "4"
         }
-    ],
-    "states": [
-        "initial",
-        "A",
-        "AA",
-        "AAB",
-        "AAB4"
     ],
 
    "transitions": {

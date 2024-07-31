@@ -1,4 +1,4 @@
 (executable
  (public_name ft_ality)
  (name main)
- (libraries sdl2))
+ (libraries sdl2 str))

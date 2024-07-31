@@ -1,6 +1,22 @@
 include Validation
 include Types
 
+let handle_error msg =
+  Printf.eprintf "Error: %s\n" msg;
+  exit 1
+
+let validate_line_format line =
+  let parts = String.split_on_char ':' line in
+  if List.length parts <> 2 then
+      handle_error (Printf.sprintf "Line '%s' does not contain exactly one colon." line);
+  let path = List.hd parts in
+  let write = List.nth parts 1 in
+  if not (Str.string_match (Str.regexp "^[A-Za-z0-9]+\\(-[A-Za-z0-9]+\\)*$") path 0) then
+      handle_error (Printf.sprintf "Path '%s' is invalid. It should consist of single characters separated by dashes." path);
+  if String.trim write = "" then
+      handle_error (Printf.sprintf "Write part '%s' should not be empty." write)
+
+
 let parse_keys (lines: string list) : key list =
   let parse_line line =
     match String.split_on_char ':' line with
@@ -10,6 +26,66 @@ let parse_keys (lines: string list) : key list =
         exit 1
   in
   List.map parse_line lines
+
+let is_char_in_keys (ch: char) (keys: key list) : bool =
+  List.exists (fun k -> k.value = String.make 1 ch) keys
+  
+
+
+let parse_combos (lines: string list) (keys: key list) : (string, transition list) Hashtbl.t =
+  let key_map = List.fold_left (fun acc k -> Hashtbl.add acc k.value k.key; acc) (Hashtbl.create (List.length keys)) keys in
+  let transitions = Hashtbl.create 10 in
+
+  let process_line line =
+      validate_line_format line;
+      let parts = String.split_on_char ':' line in
+      let path = List.hd parts in
+      let write = List.nth parts 1 in
+      let states = String.split_on_char '-' path in
+
+      let add_transition from_state read to_state write =
+          let existing_transitions =
+              if Hashtbl.mem transitions from_state then
+                  Hashtbl.find transitions from_state
+              else
+                  []
+          in
+          let updated_transitions = List.map (fun t ->
+              if t.read = read then
+                  { t with to_state; write = if t.write = "" then write else t.write }
+              else
+                  t
+          ) existing_transitions in
+          let new_transition =
+              if List.exists (fun t -> t.read = read) existing_transitions then
+                  updated_transitions
+              else
+                  existing_transitions @ [{ read; to_state; write }]
+          in
+          Hashtbl.replace transitions from_state new_transition
+      in
+
+      let rec create_transitions current_path remaining_states =
+          match remaining_states with
+          | [] -> ()
+          | [state] ->
+              if not (Hashtbl.mem key_map state) then
+                  handle_error (Printf.sprintf "State '%s' not found in keys." state);
+              let next_state = if current_path = "" then state else current_path ^ "-" ^ state in
+              add_transition current_path state next_state (String.trim write)
+          | state :: rest ->
+              if not (Hashtbl.mem key_map state) then
+                  handle_error (Printf.sprintf "State '%s' not found in keys." state);
+              let next_state = if current_path = "" then state else current_path ^ "-" ^ state in
+              add_transition current_path state next_state "";
+              create_transitions next_state rest
+      in
+
+      create_transitions "" states
+  in
+
+  List.iter process_line lines;
+  transitions
 
 let split_keys_combos lines =
   let rec aux keys combos is_keys is_combos = function
@@ -34,20 +110,20 @@ let parse ic =
   try
     let lines = read_lines ic [] in
     if validate_file(lines) then
-      let keys, _combos = split_keys_combos lines in
-      if (validate_keys keys) then (
-        print_endline "Keys and combos are valid";
-        let keysList = parse_keys keys in
-        let automaton = {
-          keys = keysList;
-          states = [];
-          state = "";
-          transitions = Hashtbl.create 10;
-        } in
-          List.iter (fun key -> print_endline (key.key ^ " " ^ key.value)) keysList;
-        (automaton)
-      ) else
-        ({keys = []; states = []; state = ""; transitions = Hashtbl.create 10})
+      let keys, combos = split_keys_combos lines in
+      print_endline "Keys and combos are valid";
+      let keysList = parse_keys keys in
+      if not (validate_keys keys) then (
+        handle_error "Invalid key format";
+      );
+      let combosList = parse_combos combos keysList in
+      let automaton = {
+        keys = keysList;
+        states = [];
+        state = "";
+        transitions = combosList;
+      } in
+      (automaton)
     else (
       print_endline "Invalid file format: file contains empty lines";
       exit 1
