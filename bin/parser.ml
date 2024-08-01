@@ -1,43 +1,25 @@
 include Validation
 include Types
-
-let handle_error msg =
-  Printf.eprintf "Error: %s\n" msg;
-  exit 1
-
-let validate_line_format line =
-  let parts = String.split_on_char ':' line in
-  if List.length parts <> 2 then
-      handle_error (Printf.sprintf "Line '%s' does not contain exactly one colon." line);
-  let path = List.hd parts in
-  let write = List.nth parts 1 in
-  if not (Str.string_match (Str.regexp "^[A-Za-z0-9]+\\(-[A-Za-z0-9]+\\)*$") path 0) then
-      handle_error (Printf.sprintf "Path '%s' is invalid. It should consist of single characters separated by dashes." path);
-  if String.trim write = "" then
-      handle_error (Printf.sprintf "Write part '%s' should not be empty." write)
-
+include Errors
 
 let parse_keys (lines: string list) : key list =
   let parse_line line =
     match String.split_on_char ':' line with
     | [key; value] -> { key = key; value = value }
     | _ ->
-        prerr_endline ("Error: Invalid key-value format in line: " ^ line);
-        exit 1
+        handle_error ("Error: Invalid key-value format in line: " ^ line);
   in
   List.map parse_line lines
 
 let is_char_in_keys (ch: char) (keys: key list) : bool =
   List.exists (fun k -> k.value = String.make 1 ch) keys
-  
-
 
 let parse_combos (lines: string list) (keys: key list) : (string, transition list) Hashtbl.t =
   let key_map = List.fold_left (fun acc k -> Hashtbl.add acc k.value k.key; acc) (Hashtbl.create (List.length keys)) keys in
   let transitions = Hashtbl.create 10 in
 
   let process_line line =
-      validate_line_format line;
+      validate_combo_line line;
       let parts = String.split_on_char ':' line in
       let path = List.hd parts in
       let write = List.nth parts 1 in
@@ -119,14 +101,12 @@ let parse ic =
       let combosList = parse_combos combos keysList in
       let automaton = {
         keys = keysList;
-        states = [];
         state = "";
         transitions = combosList;
       } in
       (automaton)
     else (
-      print_endline "Invalid file format: file contains empty lines";
-      exit 1
+      handle_error "Invalid file format: file contains empty lines";
     )
   with e ->
     close_in_noerr ic;

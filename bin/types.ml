@@ -1,7 +1,6 @@
 module Types = struct
   type automaton = {
     keys: key list;
-    states: string list;
     state: string;
     transitions: (string, transition list) Hashtbl.t;
   }
