@@ -53,13 +53,15 @@ let parse_combos (lines: string list) (keys: key list) : (string, transition lis
           | [state] ->
               if not (Hashtbl.mem key_map state) then
                   handle_error (Printf.sprintf "State '%s' not found in keys." state);
+              let corresponding_key = Hashtbl.find key_map state in
               let next_state = if current_path = "" then state else current_path ^ "-" ^ state in
-              add_transition current_path state next_state (String.trim write)
+              add_transition current_path corresponding_key next_state (String.trim write)
           | state :: rest ->
               if not (Hashtbl.mem key_map state) then
                   handle_error (Printf.sprintf "State '%s' not found in keys." state);
+              let corresponding_key = Hashtbl.find key_map state in
               let next_state = if current_path = "" then state else current_path ^ "-" ^ state in
-              add_transition current_path state next_state "";
+              add_transition current_path corresponding_key next_state "";
               create_transitions next_state rest
       in
 

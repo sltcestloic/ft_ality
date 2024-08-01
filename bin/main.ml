@@ -32,7 +32,6 @@ let () =
     let in_channel = open_in filename in
     let automaton = Parser.parse in_channel in
 
-    (* Print keys and transitions *)
     Printf.printf "Keys:\n";
     print_keys automaton.keys;
 
@@ -41,5 +40,6 @@ let () =
 
     close_in in_channel;
 
-    
+    Input.init();
+    Input.get_input(automaton);
   )
