@@ -1,0 +1,53 @@
+#Keys
+H:A
+B:B
+T:X
+F:Y
+R:L
+Y:R
+Left:LEFT
+Right:RIGHT
+Up:UP
+Down:DOWN
+#Combos
+DOWN-RIGHT-A:Ki Blast [Goku]
+DOWN-RIGHT-A:Ki Blast [Vegeta]
+RIGHT-DOWN-RIGHT-A:Ki Wave [Goku]
+RIGHT-DOWN-RIGHT-A:Ki Wave [Vegeta]
+DOWN-RIGHT-DOWN-RIGHT-A:Multi Ki Blast [Goku]
+DOWN-RIGHT-DOWN-RIGHT-A:Multi Ki Blast [Vegeta]
+DOWN-RIGHT-DOWN-RIGHT-DOWN-RIGHT-A: Lucora Gun [Vegeta]
+LEFT-RIGHT-A:Solar Flare [Goku]
+LEFT-RIGHT-A:Destructo Disk [Vegeta]
+LEFT-DOWN-RIGHT-A:Kamehameha [Goku]
+LEFT-DOWN-RIGHT-A:Galick Gun [Vegeta]
+DOWN-LEFT-RIGHT-A:Genkidama [Goku]
+DOWN-LEFT-RIGHT-A:Big Bang Attack [Vegeta]
+DOWN-LEFT-DOWN-LEFT-RIGHT-A:Instant Kamehameha [Goku]
+DOWN-LEFT-DOWN-LEFT-RIGHT-A:Final Flash [Vegeta]
+LEFT-DOWN-RIGHT-LEFT-DOWN-RIGHT-A:Final Kamehameha [Goku]
+LEFT-DOWN-RIGHT-LEFT-DOWN-RIGHT-A:Super Explosive Wave [Vegeta]
+DOWN-DOWN-A:Ki Gathering [Goku]
+DOWN-DOWN-A:Ki Gathering [Vegeta]
+LEFT-L:Backward Instant Transmission [Goku]
+RIGHT-R:Forward Instant Transmission [Goku]
+L-R:Wild Sense [Vegeta]
+RIGHT-DOWN-RIGHT-B:Rising Knee [Goku]
+RIGHT-DOWN-RIGHT-B:Crusher Knee Kick [Vegeta]
+LEFT-DOWN-RIGHT-B:Dancing Kick [Goku]
+LEFT-DOWN-RIGHT-B:Amazing Impact [Vegeta]
+RIGHT-DOWN-B:Slashdown Kick (midair) [Goku]
+RIGHT-DOWN-B:Super Dash Kick (midair) [Vegeta]
+DOWN-RIGHT-Y:Elbow Smash [Goku]
+DOWN-RIGHT-Y:Super Elbow Smash [Vegeta]
+DOWN-UP-Y:Dragon Throw [Goku]
+LEFT-RIGHT-Y:Crushing in Hands [Vegeta]
+LEFT-DOWN-RIGHT-Y:Dragon Fist [Goku]
+LEFT-DOWN-RIGHT-Y:Elite Assault [Vegeta]
+LEFT-DOWN-RIGHT-LEFT-DOWN-RIGHT-Y:Meteor Rush [Goku]
+LEFT-DOWN-RIGHT-LEFT-DOWN-RIGHT-B:Genocide Breaker [Vegeta]
+DOWN-DOWN-LEFT-RIGHT-A:Kaio-ken [Goku]
+DOWN-DOWN-LEFT-RIGHT-A:Power Ball [Vegeta]
+LEFT-RIGHT-LEFT-RIGHT-DOWN-DOWN-A:Ultimate Saiyan Smash[Goku]
+DOWN-UP-DOWN-UP-LEFT-RIGHT-LEFT-RIGHT-A:Final Explosion [Vegeta]
+UP-UP-DOWN-DOWN-LEFT-RIGHT-LEFT-RIGHT-B-A:Konami Code

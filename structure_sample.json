@@ -22,10 +22,10 @@
             { "read": "A", "to_state": "AA", "write": "" }
         ],
         "AA": [
-            { "read": "B", "to_state": "AAB", "write": "Beautiful Rhythm" }
+            { "read": "B", "to_state": "AAB", "write": "Pizza Attack" }
         ],
         "AAB": [
-            { "read": "4", "to_state": "AAB4", "write": "Beautiful Rhythm ~ Laughing Bea Her Hua" },
+            { "read": "4", "to_state": "AAB4", "write": "Raining Cheese Pizza" }
         ],
         "AAB4": [
 
