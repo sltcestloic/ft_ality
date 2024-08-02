@@ -9,13 +9,12 @@ let init () =
   with
   | e -> raise e
 
-
 let rec get_input (automaton: Types.automaton) =
   match Sdl.Event.poll_event () with
   | Some (Sdl.Event.KeyDown evt) ->
       let keycode_str = Sdlkeycode.to_string evt.keycode in
       print_endline keycode_str;
-      if keycode_str = "Escape" then (
+      if evt.keycode = Sdlkeycode.Escape then (
         ()
       )
       else (

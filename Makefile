@@ -19,10 +19,11 @@ build:
 
 .PHONY: clean
 clean:
+	rm -rf _build
 
 .PHONY: fclean
 fclean: clean
-	rm -rfv $(NAME)
+	rm -rf $(NAME)
 
 .PHONY: re
 re: fclean all
