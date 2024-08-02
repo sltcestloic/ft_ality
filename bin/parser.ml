@@ -11,9 +11,6 @@ let parse_keys (lines: string list) : key list =
   in
   List.map parse_line lines
 
-let is_char_in_keys (ch: char) (keys: key list) : bool =
-  List.exists (fun k -> k.value = String.make 1 ch) keys
-
 let parse_combos (lines: string list) (keys: key list) : (string, transition list) Hashtbl.t =
   let key_map = List.fold_left (fun acc k -> Hashtbl.add acc k.value k.key; acc) (Hashtbl.create (List.length keys)) keys in
   let transitions = Hashtbl.create 10 in
