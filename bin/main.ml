@@ -1,20 +1,10 @@
 include Parser
 include Input
 
-let print_key key =
-  Printf.printf "Key: %s, Value: %s\n" key.key key.value
-
-let print_transition transition =
-  Printf.printf "Read: %s, To State: %s, Write: %s\n"
-      transition.read transition.to_state transition.write
-
-let print_transitions transitions =
-  Hashtbl.iter (fun state transition_list ->
-      Printf.printf "State: %s\n" state;
-      List.iter print_transition transition_list
-  ) transitions
-
 let print_keys keys =
+    let print_key key =
+        print_endline (key.key ^ " -> " ^ key.value);
+    in
   List.iter print_key keys
 
 let () =
@@ -32,11 +22,9 @@ let () =
     let in_channel = open_in filename in
     let automaton = Parser.parse in_channel in
 
-    Printf.printf "Keys:\n";
+    print_endline "Key mappings:";
     print_keys automaton.keys;
-
-    Printf.printf "\nTransitions:\n";
-    print_transitions automaton.transitions;
+    print_endline "------------------------------------\n";
 
     close_in in_channel;
 

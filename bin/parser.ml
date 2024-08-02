@@ -92,10 +92,9 @@ let parse ic =
     let lines = read_lines ic [] in
     if validate_file(lines) then
       let keys, combos = split_keys_combos lines in
-      print_endline "Keys and combos are valid";
       let keysList = parse_keys keys in
       if not (validate_keys keys) then (
-        handle_error "Invalid key format";
+        handle_error "syntax error in keys";
       );
       let combosList = parse_combos combos keysList in
       let automaton = {
