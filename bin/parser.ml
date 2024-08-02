@@ -31,7 +31,7 @@ let parse_combos (lines: string list) (keys: key list) : (string, transition lis
           in
           let updated_transitions = List.map (fun t ->
               if t.read = read then
-                  { t with to_state; write = if t.write = "" then write else t.write }
+                  { t with to_state; write = if t.write = "" then write else t.write ^ "\n" ^ write }
               else
                   t
           ) existing_transitions in
