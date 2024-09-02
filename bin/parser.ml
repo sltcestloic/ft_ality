@@ -7,7 +7,7 @@ let parse_keys (lines: string list) : key list =
     match String.split_on_char ':' line with
     | [key; value] -> { key = key; value = value }
     | _ ->
-        handle_error ("Error: Invalid key-value format in line: " ^ line);
+        handle_error ("Invalid key-value format in line: " ^ line);
   in
   List.map parse_line lines
 

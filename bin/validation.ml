@@ -55,7 +55,7 @@ let validate_keys lines =
         if is_valid_format line then
           aux rest
         else (
-          handle_error ("Error: Invalid syntax in line: '" ^ line ^ "'.");
+          handle_error ("Invalid syntax in line: '" ^ line ^ "'.");
         )
   in
   aux lines

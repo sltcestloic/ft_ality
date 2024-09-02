@@ -1,0 +1,13 @@
+#Keys
+Down:DOWN
+Up:UP
+Left:LEFT
+Right:RIGHT
+P:PUNCH
+K:KICK
+#Combos
+DOWN-RIGHT-PUNCH:Rising Punch
+DOWN-RIGHT-PUNCH-DOWN-KICK:Drowning Phoenix
+DOWN-KICK:Sliding Kick
+DOWN-KICK-KICK:Dancing Kick
+DOWN-KICK-RIGHT-PUNCH:Illegal Attack
